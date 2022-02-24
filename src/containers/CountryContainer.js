@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import CountrySelect from "../components/CountrySelect";
+
 const CountryContainer = () => {
 
     const [countries, setCountries] = useState([])
@@ -15,12 +17,15 @@ const CountryContainer = () => {
     }
 
     const getPopulations = countries.map((country)=> country.population )
-    const totalPopulation = getPopulations.reduce((a, b) => a + b)
+    const totalPopulation = getPopulations.reduce((a, b) => a + b, 0)
 
     
     return ( 
-        <p>Total world population: {totalPopulation}</p>
-     );
+        <>
+                <p>Total world population: {totalPopulation}</p>
+                <CountrySelect countries={countries}/>
+        </>
+             );
 }
 
 export default CountryContainer;
