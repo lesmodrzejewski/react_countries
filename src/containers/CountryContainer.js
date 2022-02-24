@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import CountrySelect from "../components/CountrySelect";
+import CountryDetails from "../components/CountryDetails";
 
 const CountryContainer = () => {
 
@@ -29,6 +30,7 @@ const CountryContainer = () => {
         <>
                 <p>Total world population: {totalPopulation}</p>
                 <CountrySelect countries={countries} countrySelected={countrySelected}/>
+                {selectedCountry ? <CountryDetails selectedCountry={selectedCountry}/> : null}
         </>
              );
 }
