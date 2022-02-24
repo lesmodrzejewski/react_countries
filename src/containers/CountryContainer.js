@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 
 import CountrySelect from "../components/CountrySelect";
 import CountryDetails from "../components/CountryDetails";
+import FavouriteCountries from "../components/FavouriteCountries";
 
 const CountryContainer = () => {
 
     const [countries, setCountries] = useState([])
     const [selectedCountry, setSelectedCountry] = useState(null)
+    const [favouriteCountries, setFavouriteCountries] = useState([])
 
     useEffect(() => {
         getCountries();
@@ -22,6 +24,11 @@ const CountryContainer = () => {
         setSelectedCountry(country)
     }
 
+    const addFavouriteCountry = function(country){
+        const copyFavouriteCountries = [...favouriteCountries, country]
+        setFavouriteCountries(copyFavouriteCountries)
+    }
+
     const getPopulations = countries.map((country)=> country.population )
     const totalPopulation = getPopulations.reduce((a, b) => a + b, 0)
 
@@ -30,7 +37,8 @@ const CountryContainer = () => {
         <>
                 <p>Total world population: {totalPopulation}</p>
                 <CountrySelect countries={countries} countrySelected={countrySelected}/>
-                {selectedCountry ? <CountryDetails selectedCountry={selectedCountry}/> : null}
+                {selectedCountry ? <CountryDetails selectedCountry={selectedCountry} addFavouriteCountry={addFavouriteCountry}/> : null}
+                <FavouriteCountries favouriteCountries={favouriteCountries}/>
         </>
              );
 }
